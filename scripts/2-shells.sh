@@ -36,12 +36,50 @@ if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
     git clone --depth=1 https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 fi
 
+# 查找最新快照作为配置源
+LATEST_SNAPSHOT=$(ls -td "$DOTFILES_DIR/snapshot"/[0-9]* 2>/dev/null | head -1)
+CONFIG_SRC="$DOTFILES_DIR/configs"
+[ -n "$LATEST_SNAPSHOT" ] && CONFIG_SRC="$LATEST_SNAPSHOT"
+
+echo "  配置来源: $CONFIG_SRC"
+
 # 部署 dotfiles（创建符号链接）
+deploy_dotfile() {
+    local src="$CONFIG_SRC/$1"
+    local dest="$HOME/$2"
+    if [ -e "$src" ]; then
+        mkdir -p "$(dirname "$dest")"
+        ln -sf "$src" "$dest"
+        echo "  ✓ $2"
+    fi
+}
+
 echo "  部署 dotfiles..."
-[ -f "$DOTFILES_DIR/configs/zshrc" ] && ln -sf "$DOTFILES_DIR/configs/zshrc" "$HOME/.zshrc"
-[ -f "$DOTFILES_DIR/configs/gitconfig" ] && ln -sf "$DOTFILES_DIR/configs/gitconfig" "$HOME/.gitconfig"
-[ -f "$DOTFILES_DIR/configs/starship.toml" ] && ln -sf "$DOTFILES_DIR/configs/starship.toml" "$HOME/.config/starship.toml"
-[ -f "$DOTFILES_DIR/configs/tmux.conf" ] && ln -sf "$DOTFILES_DIR/configs/tmux.conf" "$HOME/.tmux.conf"
+deploy_dotfile "home/.zshrc" ".zshrc"
+deploy_dotfile "home/.bashrc" ".bashrc"
+deploy_dotfile "home/.profile" ".profile"
+deploy_dotfile "home/.gitconfig" ".gitconfig"
+deploy_dotfile "home/.npmrc" ".npmrc"
+deploy_dotfile "home/.cargo" ".cargo"
+deploy_dotfile "home/.ssh/config" ".ssh/config"
+deploy_dotfile "home/.ssh/known_hosts" ".ssh/known_hosts"
+deploy_dotfile "config/starship.toml" ".config/starship.toml"
+deploy_dotfile "config/tmux.conf" ".tmux.conf"
+
+# Neovim 配置
+if [ -d "$CONFIG_SRC/config/nvim" ]; then
+    mkdir -p "$HOME/.config"
+    ln -sf "$CONFIG_SRC/config/nvim" "$HOME/.config/nvim"
+    echo "  ✓ nvim"
+fi
+
+# Oh My Zsh 自定义配置
+if [ -d "$CONFIG_SRC/config/oh-my-zsh-custom" ]; then
+    local omz_custom="$HOME/.oh-my-zsh/custom"
+    mkdir -p "$omz_custom"
+    rsync -r "$CONFIG_SRC/config/oh-my-zsh-custom/" "$omz_custom/" 2>/dev/null || true
+    echo "  ✓ oh-my-zsh/custom/"
+fi
 
 # 设为默认 shell
 if command -v zsh &> /dev/null; then

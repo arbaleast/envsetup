@@ -1,0 +1,13 @@
+[credential]
+	helper = store
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[user]
+	email = echo@openclaw.ai
+	name = Echo
+[core]
+	excludesfile = /home/al/.gitignore
+[http]
+	proxy = http://localhost:7893
+[https]
+	proxy = http://localhost:7893

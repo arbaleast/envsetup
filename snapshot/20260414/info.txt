@@ -1,0 +1,3 @@
+快照时间: Tue Apr 14 12:01:22 PM CST 2026
+主机名: fnos
+系统: Linux fnos 6.12.18-trim #211 SMP PREEMPT_DYNAMIC Fri Jan 30 17:47:53 CST 2026 x86_64 GNU/Linux

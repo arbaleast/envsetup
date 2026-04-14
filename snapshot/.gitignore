@@ -1,0 +1,12 @@
+# 快照目录 - 不同日期的快照副本
+[0-9]*/
+
+# .git 目录（Oh My Zsh 插件内）
+.git/
+
+# 大文件测试数据
+test-data/
+tests/
+images/
+*.pack
+*.idx
