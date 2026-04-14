@@ -34,7 +34,7 @@ fi
 echo ""
 
 # 按顺序执行所有脚本
-for i in 1 2 3 4 5 6 7 8; do
+for i in 1 2 3 4 5 6 7; do
     script_name=$(printf "%02d" $i)
     script="scripts/${script_name}-*.sh"
     script_path=$(ls $script 2>/dev/null | head -1)

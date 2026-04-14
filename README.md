@@ -19,8 +19,7 @@ envsetup/
     ├── 4-android.sh      # Android SDK
     ├── 5-gpu.sh          # NVIDIA GPU 驱动检查
     ├── 6-docker.sh       # Docker + Docker Compose
-    ├── 7-inputmethod.sh   # fcitx5 中文输入法
-    └── 8-projects.sh     # 创建项目目录结构
+    └── 7-projects.sh     # 创建项目目录结构
 ```
 
 ## 一键执行（推荐）
@@ -38,8 +37,7 @@ bash scripts/3-runtimes.sh
 bash scripts/4-android.sh
 bash scripts/5-gpu.sh
 bash scripts/6-docker.sh
-bash scripts/7-inputmethod.sh
-bash scripts/8-projects.sh
+bash scripts/7-projects.sh
 ```
 
 ## 各阶段覆盖内容
@@ -52,8 +50,7 @@ bash scripts/8-projects.sh
 | 4-android | cmdline-tools / platform-tools / build-tools 34 / platforms android-34 / NDK 26 / CMake 3.22 |
 | 5-gpu | NVIDIA 驱动检查 / CUDA 安装提示 |
 | 6-docker | Docker CE / Docker Compose v2 |
-| 7-inputmethod | fcitx5 + rime 拼音 + 自动启动配置 |
-| 8-projects | ~/projects / ~/go/src / ~/Android/Sdk 等目录创建 |
+| 7-projects | ~/projects / ~/go/src / ~/Android/Sdk 等目录创建 |
 
 ## 已集成的 dotfiles 配置
 
@@ -61,7 +58,6 @@ bash scripts/8-projects.sh
 - **PATH**: Go > Neovim > Cargo > Node 生态 > pnpm > CUDA > Android SDK
 - **代理**: localhost:7893（pon/poff/pst）
 - **Git**: GitHub SSH + HTTPS 代理
-- **输入法**: fcitx5 + rime 简体拼音
 
 ## 使用前提
 
@@ -72,7 +68,7 @@ bash scripts/8-projects.sh
 ## 重启后操作
 
 1. `source ~/.zshrc` 加载新配置
-2. 重新登录（使 docker 组 / NVM / fcitx5 等生效）
+2. 重新登录（使 docker 组 / NVM 等生效）
 3. 配置 Git 用户信息
 4. 生成 SSH Key 并添加到 GitHub
 
