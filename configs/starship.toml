@@ -1,0 +1,63 @@
+# Starship 配置
+# https://starship.rs/config/
+
+format = """
+[┌───────────────────────────────────────────────────>](bold green)
+$username$directory$git_branch$git_status$nodejs$rust$golang$python$cmd_duration$line_break$character"""
+# $jobs$bun
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+fish_style_pwd_dir_length = 1
+
+[git_branch]
+format = " [$symbol$branch]($style)"
+symbol = " "
+style = "bold purple"
+
+[git_status]
+format = "[$all_status$ahead_behind]($style) "
+style = "bold yellow"
+conflicted = "!"
+untracked = "?"
+staged = '+'
+deleted = "-"
+modified = "~"
+renamed = "»"
+committed = "✔"
+
+[nodejs]
+format = "[$symbol($version)]($style)"
+symbol = " "
+style = "bold green"
+
+[golang]
+format = "[$symbol($version)]($style)"
+symbol = " "
+style = "bold cyan"
+
+[rust]
+format = "[$symbol($version)]($style)"
+symbol = " "
+style = "bold red"
+
+[python]
+format = "[${symbol}${python_version}${virtualenv}]($style)"
+symbol = " "
+style = "bold yellow"
+
+[cmd_duration]
+min_time = 500
+format = "took [$duration]($style) "
+style = "bold yellow"
+
+[time]
+disabled = false
+format = "[$time]($style) "
+style = "bold yellow"
+time_format = "%H:%M"
